@@ -41,7 +41,6 @@ fn main() -> anyhow::Result<()> {
     let display = x11::connect()?;
     let size = x11::display_size(&display)?;
     let x_image = x11::root_image(&display, size)?;
-    println!("{size:?}");
 
     let selection = slop::get_slop_selection(args.slop_args)?;
     let screenshot = image::Image::from_x11(x_image, selection);
