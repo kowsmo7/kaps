@@ -25,7 +25,6 @@ struct Args {
         short,
         long,
         value_parser,
-        default_value_t = String::from("screenshots/screenshot_%F_%X.png"),
         display_order(2),
         help = "Filepath to which the screenshot will be saved, relative to your home folder",
     )]
