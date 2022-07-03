@@ -28,7 +28,7 @@ impl Drop for Image {
     }
 }
 
-pub fn connect() -> anyhow::Result<Display> { 
+pub fn connect() -> anyhow::Result<Display> {
     let ptr = unsafe { xlib::XOpenDisplay(ptr::null()) } as *const xlib::Display;
     ensure!(!ptr.is_null(), "Failed to connect to the Xorg server.");
 
@@ -50,10 +50,7 @@ pub fn display_size(display: &Display) -> anyhow::Result<Region> {
     }
 }
 
-pub fn root_image(
-    display: &Display,
-    size: Region,
-) -> anyhow::Result<Image> {
+pub fn root_image(display: &Display, size: Region) -> anyhow::Result<Image> {
     unsafe {
         Ok(Image {
             ptr: xlib::XGetImage(
@@ -65,8 +62,7 @@ pub fn root_image(
                 size.h,
                 xlib::XAllPlanes(),
                 xlib::ZPixmap,
-            )
+            ),
         })
     }
 }
-

@@ -1,10 +1,10 @@
-use anyhow::{Context, anyhow};
+use crate::image::Image;
+use anyhow::{anyhow, Context};
 use clap::ValueEnum;
 use std::fmt::{self, Display};
-use std::path::{Path, PathBuf};
 use std::fs::File;
 use std::io::BufWriter;
-use crate::image::Image;
+use std::path::{Path, PathBuf};
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
 pub enum ImageFormat {
@@ -15,16 +15,19 @@ pub enum ImageFormat {
 impl Display for ImageFormat {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         use ImageFormat::*;
-        write!(f, "{}", match self {
-            Png => "png",
-            Infer => "infer",
-        })
+        write!(
+            f,
+            "{}",
+            match self {
+                Png => "png",
+                Infer => "infer",
+            }
+        )
     }
 }
 
 fn inferred_image_format(path: &Path) -> Option<ImageFormat> {
-    path
-        .extension()
+    path.extension()
         .and_then(|ext| match ext.to_string_lossy().as_ref() {
             "png" => Some(ImageFormat::Png),
             _ => None,
@@ -50,16 +53,15 @@ pub fn save_to_file(
 
     // essentially, we don't care about the image format
     let _image_format = match image_format {
-        ImageFormat::Infer => inferred_image_format(&path)
-            .ok_or_else(|| anyhow!("Unknown image format."))?,
+        ImageFormat::Infer => {
+            inferred_image_format(&path).ok_or_else(|| anyhow!("Unknown image format."))?
+        }
         f => f,
     };
 
     let file = File::create(&path)
-        .with_context(|| {
-            format!("Failed to open file {}", path.to_string_lossy())
-        })?;
-    
+        .with_context(|| format!("Failed to open file {}", path.to_string_lossy()))?;
+
     write(file, &screenshot.data, screenshot.width, screenshot.height)?;
 
     Ok(())

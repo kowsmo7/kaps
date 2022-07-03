@@ -1,10 +1,10 @@
-use anyhow::anyhow;
 use crate::image::Region;
-use std::io::{self, ErrorKind};
-use std::fmt::{self, Display};
-use std::process::{Output, Command};
+use anyhow::anyhow;
 use std::convert;
 use std::error;
+use std::fmt::{self, Display};
+use std::io::{self, ErrorKind};
+use std::process::{Command, Output};
 
 #[derive(Debug)]
 pub enum SlopError {
@@ -17,12 +17,16 @@ pub enum SlopError {
 impl Display for SlopError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         use SlopError::*;
-        write!(f, "{}", match self {
-            Cancelled => "Command was cancelled by user.".into(),
-            BadOutput(e) => format!("Couldn't parse slop output: {e}"),
-            NotFound => "Command `slop` not found.".into(),
-            SpawnError(e) => format!("Failed to spawn command `slop`: {e}"),
-        })
+        write!(
+            f,
+            "{}",
+            match self {
+                Cancelled => "Command was cancelled by user.".into(),
+                BadOutput(e) => format!("Couldn't parse slop output: {e}"),
+                NotFound => "Command `slop` not found.".into(),
+                SpawnError(e) => format!("Failed to spawn command `slop`: {e}"),
+            }
+        )
     }
 }
 

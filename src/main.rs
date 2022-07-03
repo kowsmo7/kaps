@@ -3,12 +3,7 @@
 use clap::Parser;
 
 #[derive(Parser, Debug)]
-#[clap(
-    author,
-    version,
-    about,
-    usage = "kaps [OPTIONS] -- <slop-args>",
-)]
+#[clap(author, version, about, usage = "kaps [OPTIONS] -- <slop-args>")]
 struct Args {
     #[clap(
         arg_enum,
@@ -26,9 +21,9 @@ struct Args {
         long,
         value_parser,
         display_order(2),
-        help = "Filepath to which the screenshot will be saved, relative to your home folder",
+        help = "Filepath to which the screenshot will be saved, relative to your home folder"
     )]
-    file_path: String, 
+    file_path: String,
 
     #[clap(hide(true))]
     slop_args: Vec<String>,
@@ -50,7 +45,7 @@ fn main() -> anyhow::Result<()> {
     Ok(())
 }
 
-mod ser;
-mod x11;
 mod image;
+mod ser;
 mod slop;
+mod x11;

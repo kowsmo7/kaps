@@ -24,7 +24,12 @@ pub struct Image {
 
 impl Image {
     pub fn from_x11(image: crate::x11::Image, snip: Region) -> Image {
-        let Region { w: width, h: height, x: offset_x, y: offset_y } = snip;
+        let Region {
+            w: width,
+            h: height,
+            x: offset_x,
+            y: offset_y,
+        } = snip;
         let mut data = Vec::with_capacity((width * height * 4) as usize);
 
         let raw_img = unsafe { *image.ptr };
@@ -64,4 +69,3 @@ impl Image {
         }
     }
 }
-
