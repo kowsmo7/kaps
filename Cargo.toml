@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 authors = ["archer"]
 description = "Simple and performant screenshot application for Xorg."
+license = "MIT OR Aparche-2.0"
 
 [dependencies]
 png = "0.17"

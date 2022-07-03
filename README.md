@@ -23,3 +23,8 @@ kaps requires the [`slop`](https://github.com/naelstrof/slop) executable to be a
 $ cargo install --git https://github.com/archerfur/kaps.git
 ```
 
+## License
+
+Copyright 2022 archerfur  
+
+This Software is dual-licensed under the MIT License ([LICENSE-MIT](./LICENSE-MIT) or [http://opensource.org/licenses/MIT]()) or the Apache-2.0 license ([LICENSE-APACHE](./LICENSE-APACHE) or [https://www.apache.org/licenses/LICENSE-2.0]()).  
