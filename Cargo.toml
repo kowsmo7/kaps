@@ -11,5 +11,4 @@ png = "0.17"
 x11 = { version = "2.19", features = ["xlib"] }
 anyhow = "1.0.57"
 clap = { version = "3.2.5", features = ["derive"] }
-home = "0.5.3"
 
